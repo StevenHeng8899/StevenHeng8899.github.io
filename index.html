@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-        <title>火车AR展示</title>
+        <title>小兔AR展示</title>
         <script src="build/three.js"></script>
         <script src="js/libs/inflate.min.js"></script>
         <script src="js/loaders/FBXLoader.js"></script>
@@ -42,7 +42,7 @@
                 /*color: white;*/
                 /*background-color: #222222;*/
                 background: transparent;
-                background-image: url('models/fbx/on.png');
+                /*background-image: url('models/fbx/on.png');*/
                 border: 0px solid white;
                 background-size:100% 100%;
                 overflow:hidden;
@@ -130,7 +130,7 @@
                         //   action.loop = 2200;   
                         //   action.clampWhenFinished = true;                  
                         }
-                        // mixer.clipAction( object.animations[ 0 ] ).play();
+                        mixer.clipAction( object.animations[ 0 ] ).play();
 
                     object.traverse( function ( child ) {
 
@@ -142,9 +142,9 @@
                         }
 
                     } );
-                    object.scale.set(2,2,2);
+                    object.scale.set(5,5,5);
                     object.position.set(0,0,0);
-                    object.rotation.set(0,Math.PI/2,0);
+                    // object.rotation.set(0,Math.PI/2,0);
                     object.name = "train";
                      targetObj = object;
                     scene.add( object );
@@ -350,11 +350,11 @@
            }
            function startAnimation(){
             if(action!=undefined){
-                    mixer = new THREE.AnimationMixer( targetObj );             
-                    action =mixer.clipAction( targetObj.animations[ 0 ] );    
-                    action.loop = 2200;
-                    action.clampWhenFinished = true; 
-                    action.play(); 
+                    // mixer = new THREE.AnimationMixer( targetObj );             
+                    // action =mixer.clipAction( targetObj.animations[ 0 ] );    
+                    // action.loop = 2200;
+                    // action.clampWhenFinished = true; 
+                    // action.play(); 
                 }
            }
            function onWindowResize() {
