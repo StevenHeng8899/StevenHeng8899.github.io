@@ -148,8 +148,9 @@
                         //   action.loop = 2200;   
                         //   action.clampWhenFinished = true;                  
                         }
-                        mixer.clipAction( object.animations[ 0 ] ).play();
                         audio.play();
+                        mixer.clipAction( object.animations[ 0 ] ).play();
+                        
                     object.traverse( function ( child ) {
 
                         if ( child.isMesh ) {
