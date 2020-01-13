@@ -59,6 +59,7 @@
             var targetObj;
             var container;
             var action;
+            var audio;
             function initThree() {
                 container = document.createElement( 'div' );
 				document.body.appendChild( container );
@@ -118,6 +119,23 @@
                 geometry = new THREE.PlaneGeometry( 220, 250);
                 updateProgressBar( 0 );
                 showProgressBar();
+
+                var listener = new THREE.AudioListener();
+                // camera.add( listener );
+                // 创建一个非位置音频对象  用来控制播放
+                 audio = new THREE.Audio(listener);
+                // 创建一个音频加载器对象
+                var audioLoader = new THREE.AudioLoader();
+                // 加载音频文件，返回一个音频缓冲区对象作为回调函数参数
+                audioLoader.load('tz_audio.mp3', function(AudioBuffer) {
+                  // console.log(AudioBuffer)
+                  // 音频缓冲区对象关联到音频对象audio
+                  audio.setBuffer(AudioBuffer);
+                  audio.setLoop(true); //是否循环
+                  audio.setVolume(1); //音量
+                  // 播放缓冲区中的音频数据
+                  // audio.play(); //play播放、stop停止、pause暂停
+              });
                   // model
                 var loader = new THREE.FBXLoader();
                 loader.load( 'models/fbx/tuzi_maya_0113.fbx', function ( object ) {
@@ -131,7 +149,7 @@
                         //   action.clampWhenFinished = true;                  
                         }
                         mixer.clipAction( object.animations[ 0 ] ).play();
-
+                        audio.play();
                     object.traverse( function ( child ) {
 
                         if ( child.isMesh ) {
@@ -143,7 +161,7 @@
 
                     } );
                     object.scale.set(8,8,8);
-                    object.position.set(0,-30,0);
+                    object.position.set(0,-38,0);
                      object.rotation.set(0,Math.PI/5,0);
                     object.name = "train";
                      targetObj = object;
@@ -151,22 +169,7 @@
                     hideProgressBar();
                 }, onProgress, onError );
 
-                var listener = new THREE.AudioListener();
-                // camera.add( listener );
-                // 创建一个非位置音频对象  用来控制播放
-                var audio = new THREE.Audio(listener);
-                // 创建一个音频加载器对象
-                var audioLoader = new THREE.AudioLoader();
-                // 加载音频文件，返回一个音频缓冲区对象作为回调函数参数
-                audioLoader.load('tz_audio.mp3', function(AudioBuffer) {
-                  // console.log(AudioBuffer)
-                  // 音频缓冲区对象关联到音频对象audio
-                  audio.setBuffer(AudioBuffer);
-                  audio.setLoop(true); //是否循环
-                  audio.setVolume(1); //音量
-                  // 播放缓冲区中的音频数据
-                  audio.play(); //play播放、stop停止、pause暂停
-              });
+
 
                 var video = document.getElementById('video');
                 var vendorUrl = window.URL || window.webkitURL;
