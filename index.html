@@ -134,7 +134,7 @@
                   audio.setLoop(true); //是否循环
                   audio.setVolume(1); //音量
                   // 播放缓冲区中的音频数据
-                  // audio.play(); //play播放、stop停止、pause暂停
+                  audio.play(); //play播放、stop停止、pause暂停
               });
                   // model
                 var loader = new THREE.FBXLoader();
@@ -148,7 +148,7 @@
                         //   action.loop = 2200;   
                         //   action.clampWhenFinished = true;                  
                         }
-                        audio.play();
+                        // audio.play();
                         mixer.clipAction( object.animations[ 0 ] ).play();
                         
                     object.traverse( function ( child ) {
